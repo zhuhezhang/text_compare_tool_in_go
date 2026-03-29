@@ -1,19 +1,24 @@
-# README
+# 文本对比（Wails + Vue3）
 
-## About
+本项目是一个基于 [Wails](https://wails.io)、Go + Vue3 的桌面应用示例，实现了两段文本对比、高亮、同步滚动、可拖拽布局、搜索与替换等功能。
 
-This is the official Wails Vue template.
+## 项目结构
+- `main.go`：Wails 应用入口，绑定后端 `App`。
+- `app.go`：后端逻辑，`CompareText` 使用 [`github.com/sergi/go-diff/diffmatchpatch`](go.mod) 实现文本对比。
+- `frontend/src/App.vue`：前端主界面逻辑及交互。
+- `frontend/src/components/Tooltip.vue`：悬浮提示组件。
+- `frontend/src/style.css`：样式定义。
+- `frontend/wailsjs/go/main/App.js` + `App.d.ts`：后端接口自动生成。
+- `wails.json`：Wails 项目配置。
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+## 开发（Dev）
+1. 安装Wails：
+2. 启动 Wails 开发模式：
+   - `wails dev`
 
-## Live Development
-
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
-
-## Building
-
-To build a redistributable, production mode package, use `wails build`.
+## 功能说明
+- 文本对比：`frontend/src/App.vue` 调用 [`CompareText`](frontend/wailsjs/go/main/App.js)  
+- 搜索替换：支持大小写、全词、正则、上下一个查询、全部替换。
+- 同步滚动：左右及结果区域同步滚动（`syncScroll`）。
+- 拖拽分割：左右比例与上下比例可拖拽调整。
+- 文本缩放：Ctrl/Cmd + 滚轮缩放字体。
